@@ -4,7 +4,11 @@ char	*ft_strchr(char *s, int c)
 {
 	int i = 0;
 
-	while (s[i] != c)
+	// Validação de NULL
+	if (!s)
+		return NULL;
+
+	while (s[i] != c && s[i] != 0) // Parar quando encontrar o '\0'
 		i++;
 	if (s[i] == c)
 		return (&s[i]);
@@ -13,6 +17,9 @@ char	*ft_strchr(char *s, int c)
 
 void	*ft_memcpy(void *dest, void *src, size_t n)
 {
+	// validação de NULL
+	if (!dest || !src || !n)
+		return dest;
 
 	if (dest < src)
 	{
@@ -35,6 +42,10 @@ size_t	ft_strlen(char *s)
 {
 	size_t	len = 0;
 
+	// Validação de NULL
+	if (!s)
+		return 0;
+
 	while (s[len] != 0)
 	{
 		len++;
@@ -44,6 +55,10 @@ size_t	ft_strlen(char *s)
 
 void	*ft_memmove(void *dest, void *src, size_t n)
 {
+	// validação de NULL
+	if (!dest || !src || !n)
+		return dest;
+
 	while (n--)
 	{
 		((unsigned char *)dest)[n] = ((unsigned char *)src)[n];
@@ -89,6 +104,8 @@ char	*get_next_line(int fd)
 		b[read_ret] = 0;
 		if (!str_append_str(&ret, b))
 			return (NULL);
+
+		tmp = ft_strchr(b, '\n'); // Valido se encontrei um \n
 	}
 
 	if (!str_append_mem(&ret, b, tmp - b + 1))

@@ -6,6 +6,7 @@ ifndef FILE
 endif
 
 compile:
+	clear
 	cc -Wall -Wextra -Werror *.c -o $(NAME)
 
 run: compile
